@@ -1,9 +1,7 @@
 <?php
 
 require_once("../../class2.php");
-if(!getperms("P")) {
-exit;
-}
+if(!getperms("P")) {exit;}
 require_once(e_ADMIN."auth.php");
 require_once(e_HANDLER."form_handler.php"); 
 require_once(e_HANDLER."file_class.php");
@@ -17,15 +15,15 @@ if (e_QUERY) {
 }
 //-----------------------------------------------------------------------------------------------------------+
 if (isset($_POST['update_medal'])) {
-        $message = ($sql->db_Update("advmedsys_medals", "medal_pic ='".$_POST['medal_pic']."',medal_name ='".$_POST['medal_name']."', medal_txt ='".$_POST['medal_txt']."' WHERE medal_id='".$_POST['id']."' ")) ? "Updated" : "Update Failed";
+        $message = ($sql->db_Update("aacgcawards_medals", "medal_pic ='".$_POST['medal_pic']."',medal_name ='".$_POST['medal_name']."', medal_txt ='".$_POST['medal_txt']."' WHERE medal_id='".$_POST['id']."' ")) ? "Updated" : "Update Failed";
 }
 
 if (isset($_POST['main_delete'])) {
         $delete_id = array_keys($_POST['main_delete']);
 	$sql2 = new db;
-    $sql2->db_Delete("advmedsys_medals", "medal_id='".$delete_id[0]."'");
+    $sql2->db_Delete("aacgcawards_medals", "medal_id='".$delete_id[0]."'");
 	$sql = new db;
-	$sql->db_Delete("advmedsys_awarded", "awarded_medal_id='".$delete_id[0]."'");
+	$sql->db_Delete("aacgcawards_awarded_medals", "awarded_medal_id='".$delete_id[0]."'");
 }
 
 if (isset($message)) {
@@ -73,7 +71,7 @@ if ($action == "") {
 
 if ($action == "edit")
 {
-                $sql->db_Select("advmedsys_medals", "medal_id, medal_name, medal_txt, medal_pic", "medal_id = $id");
+                $sql->db_Select("aacgcawards_medals", "medal_id, medal_name, medal_txt, medal_pic", "medal_id = $id");
                 $row = $sql->db_Fetch();
         $width = "width:100%";
         $text = "

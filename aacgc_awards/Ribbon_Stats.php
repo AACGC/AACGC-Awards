@@ -24,7 +24,7 @@ $text .= "
 
 
  
-        $sql->db_Select("advmedsys_medals2", "*", "ORDER BY rib_id","");
+        $sql->db_Select("aacgcawards_ribbons", "*", "ORDER BY rib_id","");
         while($row = $sql->db_Fetch()){
 
 $text .= "<table style='width:100%' class='".$themea."' cellspacing='' cellpadding=''><tr>";
@@ -36,13 +36,13 @@ $text .= "<td colspan='2' class=''><center><br>
 
 
 $sql2 = new db;
-$sql2->db_Select("advmedsys_awarded2", "*", "awarded_rib_id='".$row['rib_id']."'");
+$sql2->db_Select("aacgcawards_awarded_ribbons", "*", "awarded_rib_id='".$row['rib_id']."'");
 while($row2 = $sql2->db_Fetch()){
 $sql3 = new db;
 $sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'");
 $row3 = $sql3->db_Fetch();
 $sql4 = new db;
-$sql4->mySQLresult = @mysql_query("select awarded_user_id, count(awarded_user_id) as ribbons from ".MPREFIX."advmedsys_awarded2 where awarded_rib_id=".$row['rib_id']."
+$sql4->mySQLresult = @mysql_query("select awarded_user_id, count(awarded_user_id) as ribbons from ".MPREFIX."aacgcawards_awarded_ribbons where awarded_rib_id=".$row['rib_id']."
 and awarded_user_id=".$row3['user_id'].";");
 $rows = $sql4->db_Rows();
 for ($i=0; $i < $rows; $i++) {

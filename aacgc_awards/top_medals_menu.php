@@ -6,7 +6,7 @@ $topmed_title .= "".$pref['topmed_name']."";
 if ($pref['rm_enable_gold'] == "1")
 {$gold_obj = new gold();}
 $n = "0";
-$sql->mySQLresult = @mysql_query("select awarded_user_id, count(awarded_medal_id) as medals from ".MPREFIX."advmedsys_awarded group by awarded_user_id order by medals desc limit 0,".$pref['topmed_count'].";");
+$sql->mySQLresult = @mysql_query("select awarded_user_id, count(awarded_medal_id) as medals from ".MPREFIX."aacgcawards_awarded_medals group by awarded_user_id order by medals desc limit 0,".$pref['topmed_count'].";");
 $rows = $sql->db_Rows();
 if ($rows == 0) 
 {$topmed_text .= "No Members Have Medals Yet.";}

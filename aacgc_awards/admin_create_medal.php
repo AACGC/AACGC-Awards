@@ -1,18 +1,11 @@
 <?php
-
 require_once("../../class2.php");
-
-if(!getperms("P")) {
-echo AMS_ADMIN_S1;
-exit;
-}
-
+if(!getperms("P")) {exit;}
 require_once(e_ADMIN."auth.php");
 require_once(e_HANDLER."form_handler.php"); 
 require_once(e_HANDLER."file_class.php");
 $rs = new form;
 $fl = new e_file;
-
 //-----------------------------------------------------------------------------------------------------------+
 if ($_POST['add_medal'] == '1') {
 $newmedname = $_POST['medname'];
@@ -44,7 +37,7 @@ If ($newok == "0"){
 	$ns->tablerender("AACGC Award System (Create Medal)", $newtext);
 }
 If ($newok == "1"){
-$sql->db_Insert("advmedsys_medals", "NULL, '".$newmedname."', '".$newmedpic."', '".$newmedtxt."'") or die(mysql_error());
+$sql->db_Insert("aacgcawards_medals", "NULL, '".$newmedname."', '".$newmedpic."', '".$newmedtxt."'") or die(mysql_error());
 $ns->tablerender("", "<center><b>Medal Created</b></center>");
 }
 }

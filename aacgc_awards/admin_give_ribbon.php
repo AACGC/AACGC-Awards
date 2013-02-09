@@ -13,13 +13,13 @@ if ($_POST['ribtodb'] == "1") {
 $ribid = $_POST['ribbon'];
 $uid = $_POST['user'];
 $count = $_POST['count'];
-$sql->db_Select("user", "*", "WHERE user_id = '".$uid."'","");
+$sql->db_Select("user", "*", "user_id='".$uid."'");
 while($row = $sql->db_Fetch()){
     		    $usern2 = $row[user_name];
         	}
 $i = 1;
 while ($i <= $count):
-$sql->db_Insert("advmedsys_awarded2", "NULL,'".$ribid."' , '".$uid."', '".date("m/d/Y", time())."'");
+$sql->db_Insert("aacgcawards_awarded_ribbons", "NULL,'".$ribid."' , '".$uid."', '".date("m/d/Y", time())."'");
 $i++;
 endwhile;
 $txt = "<center><b>Successfully gave ".$count." Ribbon(s) to ".$usern2."!</b><center>";
@@ -59,7 +59,7 @@ $text = "
 
         <td style='width:70%' class='forumheader3'>
 		<select name='ribbon' size='1' class='tbox' style='width:100%'>";
-		$sql->db_Select("advmedsys_medals2", "rib_id, rib_name", "ORDER BY rib_id ASC","");
+		$sql->db_Select("aacgcawards_ribbons", "rib_id, rib_name", "ORDER BY rib_id ASC","");
         while($row = $sql->db_Fetch()){
          $text .= "<option name='ribbon' value='".$row['rib_id']."'>".$row['rib_name']."</option>";
         }

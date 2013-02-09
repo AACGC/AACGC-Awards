@@ -1,5 +1,12 @@
 <?php
 
+/*
+#############################
+#	AACGC Awards 			#
+#	Created by M@CH!N3		#
+#	http://www.aacgc.com	#
+#############################
+*/
 
 $eplug_name = "AACGC Awards";
 $eplug_version = "1.0";
@@ -31,21 +38,21 @@ $eplug_link      = TRUE;
 $eplug_link_name = "Awards";
 $eplug_link_url  = e_PLUGIN."aacgc_awards/Awards.php";
 
-$eplug_table_names = array("advmedsys_medals", "advmedsys_medals2", "advmedsys_awarded", "advmedsys_awarded2", "advmedsys_medals_request", "advmedsys_medals2_request");
+$eplug_table_names = array("aacgcawards_medals", "aacgcawards_ribbons", "aacgcawards_awarded_medals", "aacgcawards_awarded_ribbons", "aacgcawards_medals_request", "aacgcawards_ribbons_request");
 
 $eplug_tables = array(
 
-"CREATE TABLE ".MPREFIX."advmedsys_medals(medal_id int(11) NOT NULL auto_increment,medal_name varchar(50) NOT NULL,medal_pic varchar(120) NOT NULL,medal_txt text NOT NULL,PRIMARY KEY  (medal_id)) ENGINE=MyISAM;",
+"CREATE TABLE ".MPREFIX."aacgcawards_medals(medal_id int(11) NOT NULL auto_increment,medal_name varchar(50) NOT NULL,medal_pic varchar(120) NOT NULL,medal_txt text NOT NULL,PRIMARY KEY  (medal_id)) ENGINE=MyISAM;",
 
-"CREATE TABLE ".MPREFIX."advmedsys_awarded(awarded_id int(11) NOT NULL auto_increment,awarded_medal_id int(11) NOT NULL,awarded_user_id varchar(11) NOT NULL,awarded_date text NOT NULL,PRIMARY KEY  (awarded_id)) ENGINE=MyISAM;",
+"CREATE TABLE ".MPREFIX."aacgcawards_awarded_medals(awarded_id int(11) NOT NULL auto_increment,awarded_medal_id int(11) NOT NULL,awarded_user_id varchar(11) NOT NULL,awarded_date text NOT NULL,PRIMARY KEY  (awarded_id)) ENGINE=MyISAM;",
 
-"CREATE TABLE ".MPREFIX."advmedsys_medals2(rib_id int(11) NOT NULL auto_increment,rib_name varchar(50) NOT NULL,rib_pic varchar(120) NOT NULL,rib_txt text NOT NULL,PRIMARY KEY  (rib_id)) ENGINE=MyISAM;",
+"CREATE TABLE ".MPREFIX."aacgcawards_ribbons(rib_id int(11) NOT NULL auto_increment,rib_name varchar(50) NOT NULL,rib_pic varchar(120) NOT NULL,rib_txt text NOT NULL,PRIMARY KEY  (rib_id)) ENGINE=MyISAM;",
 
-"CREATE TABLE ".MPREFIX."advmedsys_awarded2(awarded_id int(11) NOT NULL auto_increment,awarded_rib_id int(11) NOT NULL,awarded_user_id varchar(11) NOT NULL,awarded_date text NOT NULL,PRIMARY KEY  (awarded_id)) ENGINE=MyISAM;",
+"CREATE TABLE ".MPREFIX."aacgcawards_awarded_ribbons(awarded_id int(11) NOT NULL auto_increment,awarded_rib_id int(11) NOT NULL,awarded_user_id varchar(11) NOT NULL,awarded_date text NOT NULL,PRIMARY KEY  (awarded_id)) ENGINE=MyISAM;",
 
-"CREATE TABLE ".MPREFIX."advmedsys_medals_request(request_id int(11) NOT NULL auto_increment,user_name text NOT NULL,reason_wanted text NOT NULL,ribbon_wanted text NOT NULL,PRIMARY KEY  (request_id)) ENGINE=MyISAM;",
+"CREATE TABLE ".MPREFIX."aacgcawards_medals_request(request_id int(11) NOT NULL auto_increment,user_name text NOT NULL,reason_wanted text NOT NULL,ribbon_wanted text NOT NULL,PRIMARY KEY  (request_id)) ENGINE=MyISAM;",
 
-"CREATE TABLE ".MPREFIX."advmedsys_medals2_request(request_id int(11) NOT NULL auto_increment,user_name text NOT NULL,reason_wanted text NOT NULL,medal_wanted text NOT NULL,PRIMARY KEY  (request_id)) ENGINE=MyISAM;");
+"CREATE TABLE ".MPREFIX."aacgcawards_ribbons_request(request_id int(11) NOT NULL auto_increment,user_name text NOT NULL,reason_wanted text NOT NULL,medal_wanted text NOT NULL,PRIMARY KEY  (request_id)) ENGINE=MyISAM;");
 
 $eplug_prefs = array(
 "armpage_title" => "Awards",
@@ -81,7 +88,7 @@ $eplug_prefs = array(
 "med_enable_request"=> "1",
 "rib_enable_userlist"=> "0",
 "med_enable_userlist"=> "0",
-"rmmenu_title"=> "Total Ribbons & Medals Awarded Menu",
+"rmmenu_title"=> "Total Awarded Menu",
 "rib_enable_userribbons"=> "0",
 "med_enable_usermedals"=> "0",
 
@@ -89,8 +96,6 @@ $eplug_prefs = array(
 
 $eplug_done = "Install Complete";
 $eplug_upgrade_done = "Upgrade Complete";
-
-
 $upgrade_table_names = "";
 $upgrade_alter_tables = "";
 $upgrade_remove_prefs = "";

@@ -10,12 +10,12 @@ $medrib_title = "".$pref['rmmenu_title']."";
 if ($pref['rib_enable_userribbons'] == "1"){
 
 	$c = 0;
-	$sql->db_Select("advmedsys_awarded2", "*", "awarded_user_id='".USERID."'");
+	$sql->db_Select("aacgcawards_awarded_ribbons", "*", "awarded_user_id='".USERID."'");
 	while($row = $sql->db_Fetch()){$c++;}
 	$ribnames = array();
 	$ribid = array();
 
-	$sql->db_Select("advmedsys_medals2", "*", "ORDER BY rib_id", "");
+	$sql->db_Select("aacgcawards_ribbons", "*", "ORDER BY rib_id", "");
 	while($row = $sql->db_Fetch()){
 	$ribnames[] = $row['rib_name'];
 	$ribid[] = $row['rib_id'];
@@ -37,7 +37,7 @@ $medrib_text .= "
 ";
 
 	for($i=0; $i < count($ribnames); $i++){
-	$sql->db_Select("advmedsys_awarded2", "*", "awarded_rib_id like ".$ribid[$i]." AND awarded_user_id like ".USERID, true);
+	$sql->db_Select("aacgcawards_awarded_ribbons", "*", "awarded_rib_id like ".$ribid[$i]." AND awarded_user_id like ".USERID, true);
 	$counter1 = 0;
 	while($row = $sql->db_Fetch()){
 	$counter1++;}
@@ -61,11 +61,11 @@ $medrib_text .= "</table><br/><br/>";}}
 if ($pref['med_enable_usermedals'] == "1"){
 
 	$c = 0;
-	$sql->db_Select("advmedsys_awarded", "*", "WHERE awarded_user_id='".USERID."'", "");
+	$sql->db_Select("aacgcawards_awarded_medals", "*", "awarded_user_id='".USERID."'");
 	while($row = $sql->db_Fetch()){$c++;}
 	$medalnames = array();
 	$medalid = array();
-	$sql->db_Select("advmedsys_medals", "*", "ORDER BY medal_id", "");
+	$sql->db_Select("aacgcawards_medals", "*", "ORDER BY medal_id", "");
 	while($row = $sql->db_Fetch()){
 	$medalnames[] = $row['medal_name'];
 	$medalid[] = $row['medal_id'];
@@ -87,7 +87,7 @@ $medrib_text .= "
 	</tr>
 ";
 	for($i=0; $i < count($medalnames); $i++){
-	$sql->db_Select("advmedsys_awarded", "*", "awarded_medal_id like ".$medalid[$i]." AND awarded_user_id like ".USERID, true);
+	$sql->db_Select("aacgcawards_awarded_medals", "*", "awarded_medal_id like ".$medalid[$i]." AND awarded_user_id like ".USERID, true);
 	$counter1 = 0;
 	while($row = $sql->db_Fetch()){
 	$counter1++;}
@@ -110,11 +110,11 @@ $medrib_text .= "</table><br/><br/>";}}
 
 //------------------------------------------------------------------------------------------------------
 
-	$ribcounter = $sql -> db_Count("advmedsys_awarded2");
+	$ribcounter = $sql -> db_Count("aacgcawards_awarded_ribbons");
 	$riblast = 0;
 	$currentunixtime = time();
 	$threedaysagounix = $currentunixtime - (60*60*24*3);
-	$sql->db_Select("advmedsys_awarded2", "*", "", "");
+	$sql->db_Select("aacgcawards_awarded_ribbons", "*", "", "");
 	while($row = $sql->db_Fetch()){
 	$dateindb = $row['awarded_date'];
 	$dateexp = explode(".",$dateindb);
@@ -139,11 +139,11 @@ $medrib_text .= "
 //-----------------------
 
 
-	$medcounter = $sql -> db_Count("advmedsys_awarded");
+	$medcounter = $sql -> db_Count("aacgcawards_awarded_medals");
 	$medlast = 0;
 	$currentunixtime = time();
 	$threedaysagounix = $currentunixtime - (60*60*24*3);
-	$sql->db_Select("advmedsys_awarded", "*", "", "");
+	$sql->db_Select("aacgcawards_awarded_medals", "*", "", "");
 	while($row = $sql->db_Fetch()){
 	$dateindb = $row['awarded_date'];
 	$dateexp = explode(".",$dateindb);

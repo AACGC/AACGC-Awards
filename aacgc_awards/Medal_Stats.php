@@ -24,7 +24,7 @@ $text .= "
 <a href='".e_PLUGIN."aacgc_awards/Awards.php'><img src='".e_PLUGIN."aacgc_awards/images/back.png' alt='Go Back' /></a>
 ";      
 	  
-        $sql->db_Select("advmedsys_medals", "*", "ORDER BY medal_id","");
+        $sql->db_Select("aacgcawards_medals", "*", "ORDER BY medal_id","");
         while($row = $sql->db_Fetch()){
 
 $text .= "<table style='width:100%' class='".$themea."' cellspacing='' cellpadding=''>";
@@ -40,13 +40,13 @@ $text .= "
 
 
 $sql2 = new db;
-$sql2->db_Select("advmedsys_awarded", "*", "awarded_medal_id='".$row['medal_id']."'");
+$sql2->db_Select("aacgcawards_awarded_medals", "*", "awarded_medal_id='".$row['medal_id']."'");
 while($row2 = $sql2->db_Fetch()){
 $sql3 = new db;
 $sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'");
 $row3 = $sql3->db_Fetch();
 $sql4 = new db;
-$sql4->mySQLresult = @mysql_query("select awarded_user_id, count(awarded_user_id) as medals from ".MPREFIX."advmedsys_awarded where awarded_medal_id=".$row['medal_id']."
+$sql4->mySQLresult = @mysql_query("select awarded_user_id, count(awarded_user_id) as medals from ".MPREFIX."aacgcawards_awarded_medals where awarded_medal_id=".$row['medal_id']."
 and awarded_user_id=".$row3['user_id'].";");
 $rows = $sql4->db_Rows();
 for ($i=0; $i < $rows; $i++) {
@@ -81,20 +81,7 @@ $text .= "<br><br><br><br><br><br><br>
 </a>";
 //------------------------------------------------------------------------+
 
-
-
 $ns -> tablerender($title, $text); 
-
-
-                                       
+                                    
 require_once(FOOTERF);
-
-
-
 ?>
-
-
-
-
-
-

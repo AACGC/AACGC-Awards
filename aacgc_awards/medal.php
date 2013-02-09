@@ -21,7 +21,7 @@ $text .= "
 <a href='".e_PLUGIN."aacgc_awards/requestmedal.php?det.".intval($sub_action)."'><img src='".e_PLUGIN."aacgc_awards/images/request.png' alt='Request' align='right' /></a>
 ";
 
-		$sql->db_Select("advmedsys_medals", "*", "medal_id='".intval($sub_action)."'");
+		$sql->db_Select("aacgcawards_medals", "*", "medal_id='".intval($sub_action)."'");
         $row = $sql->db_Fetch();
 
 $text .= "
@@ -49,7 +49,7 @@ $text .= "<br></br>
 
 
 		$sql2 = new db;
-        $sql2->db_Select("advmedsys_awarded", "*", "awarded_medal_id='".$row['medal_id']."' ORDER BY awarded_date DESC");
+        $sql2->db_Select("aacgcawards_awarded_medals", "*", "awarded_medal_id='".$row['medal_id']."' ORDER BY awarded_date DESC");
         while($row2 = $sql2->db_Fetch()){
 		$sql3 = new db;
         $sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'");

@@ -7,7 +7,7 @@ $toprib_title .= "".$pref['toprib_name']."";
 if ($pref['rm_enable_gold'] == "1")
 {$gold_obj = new gold();}
 $n = "0";
-$sql->mySQLresult = @mysql_query("select awarded_user_id, count(awarded_rib_id) as ribbons from ".MPREFIX."advmedsys_awarded2 group by awarded_user_id order by ribbons desc limit 0,".$pref['toprib_count'].";");
+$sql->mySQLresult = @mysql_query("select awarded_user_id, count(awarded_rib_id) as ribbons from ".MPREFIX."aacgcawards_awarded_ribbons group by awarded_user_id order by ribbons desc limit 0,".$pref['toprib_count'].";");
 $rows = $sql->db_Rows();
 if ($rows == 0) 
 {$toprib_text .= "No Members Have Ribbons Yet.";}

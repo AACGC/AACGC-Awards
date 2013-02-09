@@ -16,7 +16,7 @@ $newreason = $_POST['reason_wanted'];
 $newrib = $_POST['ribbon_wanted'];
 
 
-$sql->db_Insert("advmedsys_medals_request", "NULL, '".$newname."', '".$newreason."', '".$newrib."'") or die(mysql_error());
+$sql->db_Insert("advmedsys_ribbons_request", "NULL, '".$newname."', '".$newreason."', '".$newrib."'") or die(mysql_error());
 
 $ns->tablerender("", "<center><b>Request Sent</b></center>");
 
@@ -24,7 +24,7 @@ $ns->tablerender("", "<center><b>Request Sent</b></center>");
 
 //----------------------------------------------------------------------------------------------------
 
-        $sql->db_Select("advmedsys_medals2", "*", "rib_id='".intval($sub_action)."'");
+        $sql->db_Select("aacgcawards_ribbons", "*", "rib_id='".intval($sub_action)."'");
         $row = $sql->db_Fetch();
 		
 $text .= "

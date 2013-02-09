@@ -1,19 +1,11 @@
 <?php
-
-
 require_once("../../class2.php");
-
-if(!getperms("P")) {
-echo AMS_ADMIN_S1;
-exit;
-}
-
+if(!getperms("P")) {exit;}
 require_once(e_ADMIN."auth.php");
 require_once(e_HANDLER."form_handler.php"); 
 require_once(e_HANDLER."file_class.php");
 $rs = new form;
 $fl = new e_file;
-
 //-----------------------------------------------------------------------------------------------------------+
 if ($_POST['add_ribbon'] == '1') {
 $newribname = $_POST['ribname'];
@@ -46,7 +38,7 @@ If ($newok == "0"){
 	$ns->tablerender(Error, $newtext);
 }
 If ($newok == "1"){
-$sql->db_Insert("advmedsys_medals2", "NULL, '".$newribname."', '".$newribpic."', '".$newribtxt."'") or die(mysql_error());
+$sql->db_Insert("aacgcawards_ribbons", "NULL, '".$newribname."', '".$newribpic."', '".$newribtxt."'") or die(mysql_error());
 $ns->tablerender("", "<center><b>Successful created!</b></center>");
 }
 }

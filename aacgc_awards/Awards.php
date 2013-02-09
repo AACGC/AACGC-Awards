@@ -23,7 +23,7 @@ $text .= "
 	</tr>
 ";		
 		
-        $sql->db_Select("advmedsys_medals2", "*", "ORDER BY rib_id","");
+        $sql->db_Select("aacgcawards_ribbons", "*", "ORDER BY rib_id","");
         while($row = $sql->db_Fetch()){
 
 $text .= "
@@ -55,7 +55,7 @@ if ($pref['rib_enable_userlist'] == "1"){
 $text .= "<tr><td colspan='3'>";
 
 		$sql2 = new db;
-		$sql2->db_Select("advmedsys_awarded2", "*", "awarded_rib_id=".$row['rib_id']." LIMIT 0,".$pref['ribdet_count']."","");
+		$sql2->db_Select("aacgcawards_awarded_ribbons", "*", "awarded_rib_id=".$row['rib_id']." LIMIT 0,".$pref['ribdet_count']."","");
 		while($row2 = $sql2->db_Fetch()){
 		$sql3 = new db;
 		$sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'","");
@@ -91,7 +91,7 @@ $text .= "
 ";
 
 
-        $sql->db_Select("advmedsys_medals", "*", "ORDER BY medal_id","");
+        $sql->db_Select("aacgcawards_medals", "*", "ORDER BY medal_id","");
         while($row = $sql->db_Fetch()){
 			
 $text .= "
@@ -123,7 +123,7 @@ if ($pref['med_enable_userlist'] == "1"){
 $text .= "<tr><td colspan='3'>";
 
 $sql2 = new db;
-$sql2->db_Select("advmedsys_awarded", "*", "awarded_medal_id=".$row['medal_id']." LIMIT 0,".$pref['meddet_count']."","");
+$sql2->db_Select("aacgcawards_awarded_medals", "*", "awarded_medal_id=".$row['medal_id']." LIMIT 0,".$pref['meddet_count']."","");
 while($row2 = $sql2->db_Fetch()){
 $sql3 = new db;
 $sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'","");
@@ -152,11 +152,11 @@ $text .= "<table style='width:100%' class='' cellspacing='' cellpadding=''>";
 //------------------------------------------# Ribbons Counter #---------------------------------------                                            
 
 
-	    $ribcounter = $sql -> db_Count("advmedsys_awarded2");
+	    $ribcounter = $sql -> db_Count("aacgcawards_awarded_ribbons");
 	    $riblast = 0;
         $currentunixtime = time();
         $threedaysagounix = $currentunixtime - (60*60*24*3);
-        $sql->db_Select("advmedsys_awarded2", "*", "", "");
+        $sql->db_Select("aacgcawards_awarded_ribbons", "*", "", "");
         while($row = $sql->db_Fetch()){
 	    $dateindb = $row['awarded_date'];
 	    $dateexp = explode(".",$dateindb);
@@ -178,11 +178,11 @@ $text .= "
 	        
 //------------------------------------------# Total Medals Counter #---------------------------------------                                            
 
-	    $medcounter = $sql -> db_Count("advmedsys_awarded");
+	    $medcounter = $sql -> db_Count("aacgcawards_awarded_medals");
 	    $medlast = 0;
         $currentunixtime = time();
         $threedaysagounix = $currentunixtime - (60*60*24*3);
-        $sql->db_Select("advmedsys_awarded", "*", "", "");
+        $sql->db_Select("aacgcawards_awarded_medals", "*", "", "");
         while($row = $sql->db_Fetch()){
 	    $dateindb = $row['awarded_date'];
 	    $dateexp = explode(".",$dateindb);

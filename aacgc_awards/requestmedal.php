@@ -15,7 +15,7 @@ $newname = $_POST['user_name'];
 $newreason = $_POST['reason_wanted'];
 $newmed = $_POST['medal_wanted'];
 
-$sql->db_Insert("advmedsys_medals2_request", "NULL, '".$newname."', '".$newreason."', '".$newmed."'") or die(mysql_error());
+$sql->db_Insert("aacgcawards_medals_request", "NULL, '".$newname."', '".$newreason."', '".$newmed."'") or die(mysql_error());
 
 $ns->tablerender("", "<center><b>Request Sent</b></center>");
 
@@ -23,7 +23,7 @@ require_once(FOOTERF);}
 
 //---------------------------------------------------------------------------
 
-        $sql->db_Select("advmedsys_medals", "*", "medal_id='".intval($sub_action)."'");
+        $sql->db_Select("aacgcawards_medals", "*", "medal_id='".intval($sub_action)."'");
         $row = $sql->db_Fetch();
 		
 $text .= "<table style='' class=''><tr><td class='fcaption' colspan=2><center>Medal Chosen</center></td></tr>";

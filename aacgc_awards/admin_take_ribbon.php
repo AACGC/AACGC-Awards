@@ -13,7 +13,7 @@ $selecteduserid = $_POST['user_sel_id'];
 function getmedcount($ribcuid) {
 	$mcount = 0;
     $sql0000001 = new db;
-    $sql0000001->db_Select("advmedsys_awarded2","*", "awarded_user_id='".$ribcuid."'");
+    $sql0000001->db_Select("aacgcawards_awarded_ribbons","*", "awarded_user_id='".$ribcuid."'");
     while($row0000001 = $sql0000001->db_Fetch()) {
         $mcount++;
 	}
@@ -23,7 +23,7 @@ function getmedcount($ribcuid) {
 //-----------------------------------------------------------------------------------------------------------+
 if (isset($_POST['rib_delete'])) {
         $delete_id = array_keys($_POST['rib_delete']);
-        $message = ($sql->db_Delete("advmedsys_awarded2", "awarded_id ='".$delete_id[0]."' ")) ? "Deleted" : "Deletion Failed" ;
+        $message = ($sql->db_Delete("aacgcawards_awarded_ribbons", "awarded_id ='".$delete_id[0]."' ")) ? "Deleted" : "Deletion Failed" ;
 }
 if (isset($message)) {
         $ns->tablerender("", "<div style='text-align:center'><b>".$message."</b></div>");
@@ -83,9 +83,9 @@ $text .= "
         <td style='width:0%' class='forumheader3'>Delete Ribbon</td>
         </tr>";
 		
-        $sql->db_Select("advmedsys_awarded2", "*", "awarded_user_id='".$selecteduserid."'");
+        $sql->db_Select("aacgcawards_awarded_ribbons", "*", "awarded_user_id='".$selecteduserid."'");
         while($row = $sql->db_Fetch()){
-        $sql2->db_Select("advmedsys_medals2", "*", "rib_id='".$row['awarded_rib_id']."'");
+        $sql2->db_Select("aacgcawards_ribbons", "*", "rib_id='".$row['awarded_rib_id']."'");
         $row2 = $sql2->db_Fetch();
 		
         $text .= "

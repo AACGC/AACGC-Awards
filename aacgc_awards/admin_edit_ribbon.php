@@ -1,9 +1,7 @@
 <?php
 
 require_once("../../class2.php");
-if(!getperms("P")) {
-exit;
-}
+if(!getperms("P")) {exit;}
 require_once(e_ADMIN."auth.php");
 require_once(e_HANDLER."form_handler.php"); 
 require_once(e_HANDLER."file_class.php");
@@ -17,15 +15,15 @@ if (e_QUERY) {
 }
 //-----------------------------------------------------------------------------------------------------------+
 if (isset($_POST['update_ribbon'])) {
-        $message = ($sql->db_Update("advmedsys_medals2", "rib_pic ='".$_POST['rib_pic']."',rib_name ='".$_POST['rib_name']."', rib_txt ='".$_POST['rib_txt']."' WHERE rib_id='".$_POST['id']."' ")) ? "Updated" : "Update Failed";
+        $message = ($sql->db_Update("aacgcawards_ribbons", "rib_pic ='".$_POST['rib_pic']."',rib_name ='".$_POST['rib_name']."', rib_txt ='".$_POST['rib_txt']."' WHERE rib_id='".$_POST['id']."' ")) ? "Updated" : "Update Failed";
 }
 
 if (isset($_POST['main_delete'])) {
         $delete_id = array_keys($_POST['main_delete']);
 	$sql2 = new db;
-    $sql2->db_Delete("advmedsys_medals2", "rib_id='".$delete_id[0]."'");
+    $sql2->db_Delete("aacgcawards_ribbons", "rib_id='".$delete_id[0]."'");
 	$sql = new db;
-	$sql->db_Delete("advmedsys_awarded2", "awarded_rib_id='".$delete_id[0]."'");
+	$sql->db_Delete("aacgcawards_awarded_ribbons", "awarded_rib_id='".$delete_id[0]."'");
 }
 
 if (isset($message)) {
@@ -45,7 +43,7 @@ if ($action == "") {
         <td style='width:50%' class='forumheader3'>Details</td>
         <td style='width:0%' class='forumheader3'>Options</td>
         </tr>";
-        $sql->db_Select("advmedsys_medals2", "*", "ORDER BY rib_id ASC","");
+        $sql->db_Select("aacgcawards_ribbons", "*", "ORDER BY rib_id ASC","");
         while($row = $sql->db_Fetch()){
         $text .= "
         <tr>
@@ -73,7 +71,7 @@ if ($action == "") {
 
 if ($action == "edit")
 {
-                $sql->db_Select("advmedsys_medals2", "rib_id, rib_name, rib_txt, rib_pic", "rib_id = $id");
+                $sql->db_Select("aacgcawards_ribbons", "rib_id, rib_name, rib_txt, rib_pic", "rib_id = $id");
                 $row = $sql->db_Fetch();
         $width = "width:100%";
         $text = "

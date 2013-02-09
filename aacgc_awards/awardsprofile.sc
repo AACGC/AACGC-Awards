@@ -21,14 +21,14 @@ if ($pref['rib_enable_profiles'] == "1"){
 //----------------------------------------------------------------
 
 $a = 0;
-$sql->db_Select("advmedsys_awarded2", "*", "awarded_user_id='".$SUSER_ID."'");
+$sql->db_Select("aacgcawards_awarded_ribbons", "*", "awarded_user_id='".$SUSER_ID."'");
 while($row = $sql->db_Fetch())
 {$a++;}
 
 $ribnames = array();
 $ribid = array();
 
-$sql->db_Select("advmedsys_medals2", "*", "ORDER BY rib_id", "");
+$sql->db_Select("aacgcawards_ribbons", "*", "ORDER BY rib_id", "");
 while($row = $sql->db_Fetch()){
 $ribnames[] = $row['rib_name'];
 $ribid[] = $row['rib_id'];
@@ -75,14 +75,14 @@ if ($pref['med_enable_profiles'] == "1"){
 //-------------------------------------------------------------------------------------
 
 $c = 0;
-$sql->db_Select("advmedsys_awarded", "*", "awarded_user_id='".$SUSER_ID."'");
+$sql->db_Select("aacgcawards_awarded_medals", "*", "awarded_user_id='".$SUSER_ID."'");
 while($row = $sql->db_Fetch())
 {$c++;}
 
 $medalnames = array();
 $medalid = array();
 
-$sql->db_Select("advmedsys_medals", "*", "ORDER BY medal_id", "");
+$sql->db_Select("aacgcawards_medals", "*", "ORDER BY medal_id", "");
 while($row = $sql->db_Fetch()){
 $medalnames[] = $row['medal_name'];
 $medalid[] = $row['medal_id'];
@@ -99,7 +99,7 @@ $medalsu .= "<td class='forumheader3' style='width:50%'><b><u>Total Medals</u>: 
 
 for($i=0; $i < count($medalnames); $i++)
 {
-$sql->db_Select("advmedsys_awarded", "*", "awarded_medal_id like ".$medalid[$i]." AND awarded_user_id like ".$SUSER_ID, true);
+$sql->db_Select("aacgcawards_awarded_medals", "*", "awarded_medal_id like ".$medalid[$i]." AND awarded_user_id like ".$SUSER_ID, true);
 $counter1 = 0;
 while($row = $sql->db_Fetch())
 {$counter1++;}
