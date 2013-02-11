@@ -52,13 +52,13 @@ $text .= "
 
 if ($pref['rib_enable_userlist'] == "1"){
 
-$text .= "<tr><td colspan='3'>";
+$text .= "<tr><td colspan='3' class='".$themea."'>";
 
 		$sql2 = new db;
-		$sql2->db_Select("aacgcawards_awarded_ribbons", "*", "awarded_rib_id=".$row['rib_id']." LIMIT 0,".$pref['ribdet_count']."","");
+		$sql2->db_Select("aacgcawards_awarded_ribbons", "*", "awarded_rib_id=".$row['rib_id']." LIMIT 0,".$pref['ribdet_count']."");
 		while($row2 = $sql2->db_Fetch()){
 		$sql3 = new db;
-		$sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'","");
+		$sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'");
 		$row3 = $sql3->db_Fetch();
 
 		if ($pref['rm_enable_gold'] == "1"){
@@ -120,13 +120,13 @@ $text .= "
 
 if ($pref['med_enable_userlist'] == "1"){
 
-$text .= "<tr><td colspan='3'>";
+$text .= "<tr><td colspan='3' class='".$themea."'>";
 
 $sql2 = new db;
-$sql2->db_Select("aacgcawards_awarded_medals", "*", "awarded_medal_id=".$row['medal_id']." LIMIT 0,".$pref['meddet_count']."","");
+$sql2->db_Select("aacgcawards_awarded_medals", "*", "awarded_medal_id=".$row['medal_id']." LIMIT 0,".$pref['meddet_count']."");
 while($row2 = $sql2->db_Fetch()){
 $sql3 = new db;
-$sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'","");
+$sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'");
 $row3 = $sql3->db_Fetch();
 
 if ($pref['rm_enable_gold'] == "1"){
