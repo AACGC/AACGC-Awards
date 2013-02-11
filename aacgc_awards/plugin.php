@@ -9,7 +9,7 @@
 */
 
 $eplug_name = "AACGC Awards";
-$eplug_version = "1.0";
+$eplug_version = "1.1";
 $eplug_author = "M@CH!N3";
 $eplug_url = "http://www.aacgc.com";
 $eplug_email = "admin@aacgc.com";
