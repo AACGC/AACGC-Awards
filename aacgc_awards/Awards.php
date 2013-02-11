@@ -159,7 +159,7 @@ $text .= "<table style='width:100%' class='' cellspacing='' cellpadding=''>";
         $sql->db_Select("aacgcawards_awarded_ribbons", "*", "", "");
         while($row = $sql->db_Fetch()){
 	    $dateindb = $row['awarded_date'];
-	    $dateexp = explode(".",$dateindb);
+	    $dateexp = explode("/",$dateindb);
 	    $dateunix = mktime(0,0,0,$dateexp[1],$dateexp[0],$dateexp[2]);
 	    if ($dateunix > $threedaysagounix) {
 		$riblast = $riblast + 1;}}
@@ -185,7 +185,7 @@ $text .= "
         $sql->db_Select("aacgcawards_awarded_medals", "*", "", "");
         while($row = $sql->db_Fetch()){
 	    $dateindb = $row['awarded_date'];
-	    $dateexp = explode(".",$dateindb);
+	    $dateexp = explode("/",$dateindb);
 	    $dateunix = mktime(0,0,0,$dateexp[1],$dateexp[0],$dateexp[2]);
 	    if ($dateunix > $threedaysagounix) {
 		$medlast = $medlast + 1;}}
