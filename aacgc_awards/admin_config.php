@@ -10,43 +10,54 @@ require_once(e_ADMIN . "auth.php");
 if (!defined('ADMIN_WIDTH'))
 {define(ADMIN_WIDTH, "width:100%;");}
 
+include(e_HANDLER."ren_help.php");
+
+$offset = $pref['awards_dateoffset'];
+$time = time()  + ($offset * 60 * 60);
+$ctime = $time;
+$dformat = $pref['awards_dateformat'];
+$date = date($dformat, $ctime);
+
 if (e_QUERY == "update")
 {
-    $pref['armpage_title'] = $_POST['armpage_title'];
-    $pref['rib_fsize'] = $_POST['rib_fsize'];
-    $pref['rib_img1'] = $_POST['rib_img1'];
-    $pref['rib_img2'] = $_POST['rib_img2'];
-    $pref['rib_ffsize'] = $_POST['rib_ffsize'];
-    $pref['rib_fimg'] = $_POST['rib_fimg'];
-    $pref['rib_userimg'] = $_POST['rib_userimg'];
-    $pref['rib_userfsize'] = $_POST['rib_userfsize'];
-    $pref['med_fsize'] = $_POST['med_fsize'];
-    $pref['med_ffsize'] = $_POST['med_ffsize'];
-    $pref['med_img1'] = $_POST['med_img1'];
-    $pref['med_img2'] = $_POST['med_img2'];
-    $pref['med_fimg'] = $_POST['med_fimg'];
-    $pref['med_userimg'] = $_POST['med_userimg'];
-    $pref['med_userfsize'] = $_POST['med_userfsize'];
-    $pref['rib_fsizer'] = $_POST['rib_fsizer'];
-    $pref['rib_imgr'] = $_POST['rib_imgr'];
-    $pref['med_fsizer'] = $_POST['med_fsizer'];
-    $pref['med_imgr'] = $_POST['med_imgr'];
-    $pref['toprib_name'] = $_POST['toprib_name'];
-    $pref['toprib_count'] = $_POST['toprib_count'];
-    $pref['topmed_name'] = $_POST['topmed_name'];
-    $pref['topmed_count'] = $_POST['topmed_count'];
-    $pref['meddet_count'] = $_POST['meddet_count'];
-    $pref['ribdet_count'] = $_POST['ribdet_count'];
-    $pref['rmmenu_title'] = $_POST['rmmenu_title'];
-    $pref['rspage_title'] = $_POST['rspage_title'];
-    $pref['mspage_title'] = $_POST['mspage_title'];
-    $pref['ribcount_userimg'] = $_POST['ribcount_userimg'];
-    $pref['medcount_userimg'] = $_POST['medcount_userimg'];
-    $pref['ribcount_fsize'] = $_POST['ribcount_fsize'];
-    $pref['medcount_fsize'] = $_POST['medcount_fsize'];
-    $pref['numrib'] = $_POST['numrib'];
-    $pref['nummed'] = $_POST['nummed'];
-
+    $pref['armpage_title'] = $tp->toDB($_POST['armpage_title']);
+    $pref['rib_fsize'] = $tp->toDB($_POST['rib_fsize']);
+    $pref['rib_img1'] = $tp->toDB($_POST['rib_img1']);
+    $pref['rib_img2'] = $tp->toDB($_POST['rib_img2']);
+    $pref['rib_ffsize'] = $tp->toDB($_POST['rib_ffsize']);
+    $pref['rib_fimg'] = $tp->toDB($_POST['rib_fimg']);
+    $pref['rib_userimg'] = $tp->toDB($_POST['rib_userimg']);
+    $pref['rib_userfsize'] = $tp->toDB($_POST['rib_userfsize']);
+    $pref['med_fsize'] = $tp->toDB($_POST['med_fsize']);
+    $pref['med_ffsize'] = $tp->toDB($_POST['med_ffsize']);
+    $pref['med_img1'] = $tp->toDB($_POST['med_img1']);
+    $pref['med_img2'] = $tp->toDB($_POST['med_img2']);
+    $pref['med_fimg'] = $tp->toDB($_POST['med_fimg']);
+    $pref['med_userimg'] = $tp->toDB($_POST['med_userimg']);
+    $pref['med_userfsize'] = $tp->toDB($_POST['med_userfsize']);
+    $pref['rib_fsizer'] = $tp->toDB($_POST['rib_fsizer']);
+    $pref['rib_imgr'] = $tp->toDB($_POST['rib_imgr']);
+    $pref['med_fsizer'] = $tp->toDB($_POST['med_fsizer']);
+    $pref['med_imgr'] = $tp->toDB($_POST['med_imgr']);
+    $pref['toprib_name'] = $tp->toDB($_POST['toprib_name']);
+    $pref['toprib_count'] = $tp->toDB($_POST['toprib_count']);
+    $pref['topmed_name'] = $tp->toDB($_POST['topmed_name']);
+    $pref['topmed_count'] = $tp->toDB($_POST['topmed_count']);
+    $pref['meddet_count'] = $tp->toDB($_POST['meddet_count']);
+    $pref['ribdet_count'] = $tp->toDB($_POST['ribdet_count']);
+    $pref['rmmenu_title'] = $tp->toDB($_POST['rmmenu_title']);
+    $pref['rspage_title'] = $tp->toDB($_POST['rspage_title']);
+    $pref['mspage_title'] = $tp->toDB($_POST['mspage_title']);
+    $pref['ribcount_userimg'] = $tp->toDB($_POST['ribcount_userimg']);
+    $pref['medcount_userimg'] = $tp->toDB($_POST['medcount_userimg']);
+    $pref['ribcount_fsize'] = $tp->toDB($_POST['ribcount_fsize']);
+    $pref['medcount_fsize'] = $tp->toDB($_POST['medcount_fsize']);
+    $pref['numrib'] = $tp->toDB($_POST['numrib']);
+    $pref['nummed'] = $tp->toDB($_POST['nummed']);
+    $pref['awards_header'] = $tp->toDB($_POST['awards_header']);
+    $pref['awards_intro'] = $tp->toDB($_POST['awards_intro']);
+    $pref['awards_dateoffset'] = $tp->toDB($_POST['awards_dateoffset']);
+    $pref['awards_dateformat'] = $tp->toDB($_POST['awards_dateformat']);
 
 if (isset($_POST['rib_enable_forums'])) 
 {$pref['rib_enable_forums'] = 1;}
@@ -137,17 +148,28 @@ $text .= "
 		<tr>
 			<td colspan='3' class='fcaption'><b>Main Display Settings:</b></td>
 		</tr>
-                <tr>
-		        <td style='width:30%' class='forumheader3'>Enable Gold System Support:</td>
-		        <td colspan=2 class='forumheader3'>".($pref['rm_enable_gold'] == 1 ? "<input type='checkbox' name='rm_enable_gold' value='1' checked='checked' />" : "<input type='checkbox' name='rm_enable_gold' value='0' />")."(shows orbs, must have gold sytem 4.x and gold orbs 1.x installed)</td>
-	        </tr>
-
-
-
-
+		<tr>
+			<td style='width:30%' class='forumheader3'>Date Format:<br/>(<a href='http://php.net/manual/en/function.date.php' target=_blank'>PHP Date Formats</a>)</td>
+			<td colspan='2'  class='forumheader3'>
+				<input class='tbox' type='text' size='10' name='awards_dateformat' value='".$tp->toFORM($pref['awards_dateformat' ])."' /> (Currently: ".$date.")
+			</td>
+		</tr>
+		<tr>
+			<td style='width:30%' class='forumheader3'>Date offset:<br/>(If using hours)</td>
+			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='10' name='awards_dateoffset' value='".$tp->toFORM($pref['awards_dateoffset' ])."' /> (+/- hours)</td>
+		</tr>
 		<tr>
 			<td style='width:30%' class='forumheader3'>Display Page Title:</td>
 			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='60' name='armpage_title' value='".$tp->toFORM($pref['armpage_title'])."' /></td>
+		</tr>
+		<tr>
+        	<td style='width:' class='forumheader3'>Page Header:</td>
+        	<td style='width:' class='forumheader3'>
+	    		<textarea class='tbox' rows='5' cols='100' name='awards_header' onselect='storeCaret(this);' onclick='storeCaret(this);' onkeyup='storeCaret(this);'>".$pref['awards_header']."</textarea><br>";
+
+$text .= display_help('helpb', 'forum');
+
+$text .= "</td> 
 		</tr>
 		<tr>
 			<td style='width:30%' class='forumheader3'>Ribbon Font Size:</td>
@@ -256,6 +278,64 @@ $text .= "
 
 
 
+
+
+			<tr>
+			<td colspan='3' class='fcaption'><b>User Awarded / Counter Menus Settings:</b></td>
+		</tr>
+		<tr>
+			<td style='width:30%' class='forumheader3'>Awarded / Counter Menu Name:</td>
+			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='60' name='rmmenu_title' value='".$tp->toFORM($pref['rmmenu_title'])."' /></td>
+		</tr>
+	    <tr>
+		        <td style='width:30%' class='forumheader3'>Show User's Ribbons On Menu:</td>
+		        <td colspan='2' class='forumheader3'>".($pref['rib_enable_userribbons'] == 1 ? "<input type='checkbox' name='rib_enable_userribbons' value='1' checked='checked' />" : "<input type='checkbox' name='rib_enable_userribbons' value='0' />")."</td>
+	    </tr>
+	    <tr>
+		        <td style='width:30%' class='forumheader3'>Show User's Medals On Menu:</td>
+		        <td colspan='2' class='forumheader3'>".($pref['med_enable_usermedals'] == 1 ? "<input type='checkbox' name='med_enable_usermedals' value='1' checked='checked' />" : "<input type='checkbox' name='med_enable_usermedals' value='0' />")."</td>
+	    </tr>
+		<tr>
+			<td style='width:30%' class='forumheader3'>Users Ribbon Font Size:</td>
+			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='ribcount_fsize' value='".$tp->toFORM($pref['ribcount_fsize'])."' />px</td>
+		</tr>
+		<tr>
+			<td style='width:30%' class='forumheader3'>Users Ribbon Image Size:</td>
+			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='ribcount_userimg' value='".$tp->toFORM($pref['ribcount_userimg'])."' />px</td>
+		</tr>
+		<tr>
+			<td style='width:30%' class='forumheader3'>Users Medal Font Size:</td>
+			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='medcount_fsize' value='".$tp->toFORM($pref['medcount_fsize'])."' />px</td>
+		</tr>
+		<tr>
+			<td style='width:30%' class='forumheader3'>Users Medal Image Size:</td>
+			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='medcount_userimg' value='".$tp->toFORM($pref['medcount_userimg'])."' />px</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td colspan='3' class='fcaption'><b>Top Member Menus Settings:</b></td>
+		</tr>
+		<tr>
+			<td style='width:30%' class='forumheader3'>Ribbon Menu Name:</td>
+			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='60' name='toprib_name' value='".$tp->toFORM($pref['toprib_name'])."' /></td>
+		</tr>
+		<tr>
+			<td style='width:30%' class='forumheader3'>Medal Menu Name:</td>
+			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='60' name='topmed_name' value='".$tp->toFORM($pref['topmed_name'])."' /></td>
+		</tr>
+		<tr>
+			<td style='width:30%' class='forumheader3'># of Users on Ribbon Menu:</td>
+			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='toprib_count' value='".$tp->toFORM($pref['toprib_count'])."' /></td>
+		</tr>
+		<tr>
+			<td style='width:30%' class='forumheader3'># of Users on Medal Menu:</td>
+			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='topmed_count' value='".$tp->toFORM($pref['topmed_count'])."' /></td>
+		</tr>
+
+
+
 		<tr>
 			<td colspan='3' class='fcaption'><b>Forum Settings:</b></td>
 		</tr>
@@ -303,12 +383,6 @@ $text .= "
 
 
 
-
-
-
-
-
-
 		<tr>
 			<td colspan='3' class='fcaption'><b>User Profile Settings:</b>  (Only Works On Default E107 Profiles, Altenate Profiles Plugin Not Suported Yet)</td>
 		</tr>
@@ -336,58 +410,31 @@ $text .= "
 			<td style='width:30%' class='forumheader3'>Profile Medal Image Size:</td>
 			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='med_userimg' value='".$tp->toFORM($pref['med_userimg'])."' />px</td>
                         
-                </tr>
+        </tr>
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
 		<tr>
-			<td colspan='3' class='fcaption'><b>User Awarded / Counter Menus Settings:</b></td>
+			<td colspan='3' class='fcaption'><b>Other Settings:</b></td>
 		</tr>
 		<tr>
-			<td style='width:30%' class='forumheader3'>Awarded / Counter Menu Name:</td>
-			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='60' name='rmmenu_title' value='".$tp->toFORM($pref['rmmenu_title'])."' /></td>
-		</tr>
-	        <tr>
-		        <td style='width:30%' class='forumheader3'>Show User's Ribbons On Menu:</td>
-		        <td colspan=2 class='forumheader3'>".($pref['rib_enable_userribbons'] == 1 ? "<input type='checkbox' name='rib_enable_userribbons' value='1' checked='checked' />" : "<input type='checkbox' name='rib_enable_userribbons' value='0' />")."</td>
-	        </tr>
-	        <tr>
-		        <td style='width:30%' class='forumheader3'>Show User's Medals On Menu:</td>
-		        <td colspan=2 class='forumheader3'>".($pref['med_enable_usermedals'] == 1 ? "<input type='checkbox' name='med_enable_usemedals' value='1' checked='checked' />" : "<input type='checkbox' name='med_enable_usermedals' value='0' />")."</td>
-	        </tr>
-		<tr>
-			<td style='width:30%' class='forumheader3'>Users Ribbon Font Size:</td>
-			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='ribcount_fsize' value='".$tp->toFORM($pref['ribcount_fsize'])."' />px</td>
-		</tr>
-		<tr>
-			<td style='width:30%' class='forumheader3'>Users Ribbon Image Size:</td>
-			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='ribcount_userimg' value='".$tp->toFORM($pref['ribcount_userimg'])."' />px</td>
-		</tr>
-		<tr>
-			<td style='width:30%' class='forumheader3'>Users Medal Font Size:</td>
-			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='medcount_fsize' value='".$tp->toFORM($pref['medcount_fsize'])."' />px</td>
-		</tr>
-		<tr>
-			<td style='width:30%' class='forumheader3'>Users Medal Image Size:</td>
-			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='medcount_userimg' value='".$tp->toFORM($pref['medcount_userimg'])."' />px</td>
-		</tr>
-		<tr>
-			<td colspan='3' class='fcaption'><b>Top Member Menus Settings:</b></td>
-		</tr>
-		<tr>
-			<td style='width:30%' class='forumheader3'>Ribbon Menu Name:</td>
-			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='60' name='toprib_name' value='".$tp->toFORM($pref['toprib_name'])."' /></td>
-		</tr>
-		<tr>
-			<td style='width:30%' class='forumheader3'>Medal Menu Name:</td>
-			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='60' name='topmed_name' value='".$tp->toFORM($pref['topmed_name'])."' /></td>
-		</tr>
-		<tr>
-			<td style='width:30%' class='forumheader3'># of Users on Ribbon Menu:</td>
-			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='toprib_count' value='".$tp->toFORM($pref['toprib_count'])."' /></td>
-		</tr>
-		<tr>
-			<td style='width:30%' class='forumheader3'># of Users on Medal Menu:</td>
-			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='topmed_count' value='".$tp->toFORM($pref['topmed_count'])."' /></td>
-		</tr>
-                <tr>
+		        <td style='width:30%' class='forumheader3'>Enable Gold System Support:</td>
+		        <td colspan=2 class='forumheader3'>".($pref['rm_enable_gold'] == 1 ? "<input type='checkbox' name='rm_enable_gold' value='1' checked='checked' />" : "<input type='checkbox' name='rm_enable_gold' value='0' />")."(shows orbs, must have gold sytem 4.x and gold orbs 1.x installed)</td>
+	   </tr>
+	   
+	   
+	   
+	   
+	   
+	   
+       <tr>
 			<td colspan='3' class='fcaption' style='text-align: left;'><input type='submit' name='update' value='Save Settings' class='button' /></td>
 		</tr>
 </table>
