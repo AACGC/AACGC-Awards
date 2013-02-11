@@ -53,6 +53,11 @@ $text .= "<br></br>
 		$sql3 = new db;
         $sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'");
         $row3 = $sql3->db_Fetch();
+		
+		$dformat = $pref['awards_dateformat'];
+		$offset = $pref['awards_dateoffset'];
+		$time = $row2['awarded_date'] + ($offset * 60 * 60);
+		$awarddate = date($dformat, $time);
 
 		if ($pref['rm_enable_gold'] == "1"){
 		$userorb = "<a href='".e_BASE."user.php?id.".$row2['awarded_user_id']."'>".$gold_obj->show_orb($row2['awarded_user_id'])."</a>";}
@@ -62,7 +67,7 @@ $text .= "<br></br>
 $text .= "
 	<tr>
     	<td style='text-align:center' class='".$themeb."'>
-			<a href='".e_BASE."user.php?id.".$row2['awarded_user_id']."'>".$userorb."</a> - ".$row2['awarded_date']."
+			<a href='".e_BASE."user.php?id.".$row2['awarded_user_id']."'>".$userorb."</a> - ".$awarddate."
 		</td>
 	</tr>
 ";}

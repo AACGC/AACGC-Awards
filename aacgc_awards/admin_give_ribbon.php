@@ -8,18 +8,31 @@ exit;
 require_once(e_ADMIN."auth.php");
 require_once(e_HANDLER."form_handler.php"); 
 require_once(e_HANDLER."file_class.php");
+require_once(e_HANDLER."calendar/calendar_class.php");
+$cal = new DHTML_Calendar(true);
+function headerjs()
+{
+	global $cal;
+	require_once(e_HANDLER."calendar/calendar_class.php");
+	$cal = new DHTML_Calendar(true);
+	return $cal->load_files();
+}
 //-----------------------------------------------------------------------------------------------------------+
 if ($_POST['ribtodb'] == "1") {
+$offset = $pref['awards_dateoffset'];
+$awarddate = $_POST['awarded_date']  + ($offset * 60 * 60);
 $ribid = $_POST['ribbon'];
 $uid = $_POST['user'];
 $count = $_POST['count'];
+$date = $tp->toDB($awarddate);
+
 $sql->db_Select("user", "*", "user_id='".$uid."'");
 while($row = $sql->db_Fetch()){
     		    $usern2 = $row[user_name];
         	}
 $i = 1;
 while ($i <= $count):
-$sql->db_Insert("aacgcawards_awarded_ribbons", "NULL,'".$ribid."' , '".$uid."', '".date("m/d/Y", time())."'");
+$sql->db_Insert("aacgcawards_awarded_ribbons", "NULL,'".$ribid."' , '".$uid."', '".$date."'");
 $i++;
 endwhile;
 $txt = "<center><b>Successfully gave ".$count." Ribbon(s) to ".$usern2."!</b><center>";
@@ -81,11 +94,26 @@ $text = "
 		<option name='count' value='8'>8</option>
 		<option name='count' value='9'>9</option>
 		<option name='count' value='10'>10</option>
-
-
-
         </td>
 		</tr>
+		<tr>
+        <td style='width:; text-align:right' class='forumheader3'>Date Awarded:</td>
+		<td style='width:' class='forumheader3'>";
+
+$text .= $cal->make_input_field(
+           array('firstDay'       => 1,
+                 'showsTime'      => true,
+                 'showOthers'     => true,
+                 'ifFormat'       => '%s',
+                 'weekNumbers'    => false,
+                 'timeFormat'     => '12'),
+           array('style'       => 'color: #840; background-color: #ff8; border: 1px solid #000; text-align: center',
+                 'name'        => 'awarded_date',
+                 'value'       => ''));
+		
+$text .="</td>";
+
+$text .="</tr>
         <tr>
         <td colspan='2' style='text-align:center' class='forumheader'>
 		<input type='hidden' name='ribtodb' value='1'>

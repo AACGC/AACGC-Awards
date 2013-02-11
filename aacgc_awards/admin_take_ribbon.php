@@ -88,12 +88,17 @@ $text .= "
         $sql2->db_Select("aacgcawards_ribbons", "*", "rib_id='".$row['awarded_rib_id']."'");
         $row2 = $sql2->db_Fetch();
 		
+		$dformat = $pref['awards_dateformat'];
+		$offset = $pref['awards_dateoffset'];
+		$time = $row['awarded_date'] + ($offset * 60 * 60);
+		$awarddate = date($dformat, $time);
+				
         $text .= "
         <tr>
         <td style='width:' class='forumheader3'>".$row['awarded_id']."</td>
         <td style='width:' class='forumheader3'><center><img width='50px' src='ribbons/".$row2['rib_pic']."' alt=''></img></center></td>
         <td style='width:' class='forumheader3'>".$row2['rib_name']."</td>
-        <td style='width:' class='forumheader3'>".$row['awarded_date']."</td>
+        <td style='width:' class='forumheader3'>".$awarddate."</td>
         <td style='width:; text-align:center; white-space: nowrap' class='forumheader3'>
 		<input type='image' title='".LAN_DELETE."' name='rib_delete[".$row['awarded_id']."]' src='".ADMIN_DELETE_ICON_PATH."' onclick=\"return jsconfirm('".LAN_CONFIRMDEL." [ID: {$row['awarded_id']} ]')\"/>
 		</td>

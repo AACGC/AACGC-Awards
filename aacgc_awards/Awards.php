@@ -8,8 +8,10 @@ if ($pref['rm_enable_gold'] == "1")
 
 $title .= "".$pref['armpage_title'].""; 
 
+$theme = "";
 $themea = "forumheader3";
 $themeb = "indent";
+$themec = "fcaption";
 
 //------------------------------------# Ribbons #--------------------------------------------------------
 
@@ -66,7 +68,13 @@ $text .= "<tr><td colspan='3' class='".$themea."'>";
 		else
 		{$userorb = "<a href='".e_BASE."user.php?id.".$row3['user_id']."'>".$row3['user_name']."</a>";}
 
-$text .= "".$userorb." (".$row2['awarded_date'].") , ";}
+		$dformat = $pref['awards_dateformat'];
+		$offset = $pref['awards_dateoffset'];
+		$time = $row2['awarded_date'] + ($offset * 60 * 60);
+		$awarddate = date($dformat, $time);
+
+
+$text .= "".$userorb." (".$awarddate.") , ";}
 $text .= "</td></tr>";}
 
 $text .= "
@@ -122,19 +130,23 @@ if ($pref['med_enable_userlist'] == "1"){
 
 $text .= "<tr><td colspan='3' class='".$themea."'>";
 
-$sql2 = new db;
-$sql2->db_Select("aacgcawards_awarded_medals", "*", "awarded_medal_id=".$row['medal_id']." LIMIT 0,".$pref['meddet_count']."");
-while($row2 = $sql2->db_Fetch()){
-$sql3 = new db;
-$sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'");
-$row3 = $sql3->db_Fetch();
+		$sql2 = new db;
+		$sql2->db_Select("aacgcawards_awarded_medals", "*", "awarded_medal_id=".$row['medal_id']." LIMIT 0,".$pref['meddet_count']."");
+		while($row2 = $sql2->db_Fetch()){
+		$sql3 = new db;
+		$sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'");
+		$row3 = $sql3->db_Fetch();
+		$dformat = $pref['awards_dateformat'];
+		$offset = $pref['awards_dateoffset'];
+		$time = $row2['awarded_date'] + ($offset * 60 * 60);
+		$awarddate = date($dformat, $time);
 
 if ($pref['rm_enable_gold'] == "1"){
 $userorb = "<a href='".e_BASE."user.php?id.".$row3['user_id']."'>".$gold_obj->show_orb($row3['user_id'])."";}
 else
 {$userorb = "<a href='".e_BASE."user.php?id.".$row3['user_id']."'>".$row3['user_name']."</a>";}
 
-$text .= "".$userorb." (".$row2['awarded_date'].") , ";}}
+$text .= "".$userorb." (".$awarddate.") , ";}}
 
 $text .= "</td></tr>";
 
@@ -159,9 +171,7 @@ $text .= "<table style='width:100%' class='' cellspacing='' cellpadding=''>";
         $sql->db_Select("aacgcawards_awarded_ribbons", "*", "", "");
         while($row = $sql->db_Fetch()){
 	    $dateindb = $row['awarded_date'];
-	    $dateexp = explode("/",$dateindb);
-	    $dateunix = mktime(0,0,0,$dateexp[1],$dateexp[0],$dateexp[2]);
-	    if ($dateunix > $threedaysagounix) {
+	    if ($dateindb > $threedaysagounix) {
 		$riblast = $riblast + 1;}}
 
 $text .= "
@@ -185,9 +195,7 @@ $text .= "
         $sql->db_Select("aacgcawards_awarded_medals", "*", "", "");
         while($row = $sql->db_Fetch()){
 	    $dateindb = $row['awarded_date'];
-	    $dateexp = explode("/",$dateindb);
-	    $dateunix = mktime(0,0,0,$dateexp[1],$dateexp[0],$dateexp[2]);
-	    if ($dateunix > $threedaysagounix) {
+	    if ($dateindb > $threedaysagounix) {
 		$medlast = $medlast + 1;}}
 
 $text .= "

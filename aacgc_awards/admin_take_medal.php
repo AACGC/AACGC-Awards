@@ -22,7 +22,7 @@ function getmedcount($medcuid) {
 //-----------------------------------------------------------------------------------------------------------+
 if (isset($_POST['medal_delete'])) {
         $delete_id = array_keys($_POST['medal_delete']);
-        $message = ($sql->db_Delete("aacgcawards_awarded_medals", "awarded_id ='".$delete_id[0]."' ")) ? AMS_ADMIN_S23 : AMS_ADMIN_S24 ;
+        $message = ($sql->db_Delete("aacgcawards_awarded_medals", "awarded_id ='".$delete_id[0]."' ")) ? "Medal Removed" : "Removal Failed";
 }
 if (isset($message)) {
         $ns->tablerender("", "<div style='text-align:center'><b>".$message."</b></div>");
@@ -86,12 +86,17 @@ $text .= "
         $sql2->db_Select("aacgcawards_medals", "*", "medal_id='".$row['awarded_medal_id']."'");
         $row2 = $sql2->db_Fetch();
 		
+		$dformat = $pref['awards_dateformat'];
+		$offset = $pref['awards_dateoffset'];
+		$time = $row['awarded_date'] + ($offset * 60 * 60);
+		$awarddate = date($dformat, $time);
+				
         $text .= "
         <tr>
         <td style='width:' class='forumheader3'>".$row['awarded_id']."</td>
         <td style='width:' class='forumheader3'><center><img width='50px' src='medals/".$row2['medal_pic']."' alt='' /></center></td>
         <td style='width:' class='forumheader3'>".$row2['medal_name']."</td>
-        <td style='width:' class='forumheader3'>".$row['awarded_date']."</td>
+        <td style='width:' class='forumheader3'>".$awarddate."</td>
         <td style='width:; text-align:center; white-space: nowrap' class='forumheader3'>
 		<input type='image' title='".LAN_DELETE."' name='medal_delete[".$row['awarded_id']."]' src='".ADMIN_DELETE_ICON_PATH."' onclick=\"return jsconfirm('".LAN_CONFIRMDEL." [ID: {$row['awarded_id']} ]')\"/>
 		</td>

@@ -8,17 +8,31 @@ exit;
 require_once(e_ADMIN."auth.php");
 require_once(e_HANDLER."form_handler.php"); 
 require_once(e_HANDLER."file_class.php");
+require_once(e_HANDLER."calendar/calendar_class.php");
+$cal = new DHTML_Calendar(true);
+function headerjs()
+{
+	global $cal;
+	require_once(e_HANDLER."calendar/calendar_class.php");
+	$cal = new DHTML_Calendar(true);
+	return $cal->load_files();
+}
 //-----------------------------------------------------------------------------------------------------------+
 if ($_POST['medaltodb'] == "1") {
-$medid = $_POST['medal'];
-$uid = $_POST['user'];
-$count = $_POST['count'];
+	
+$offset = $pref['awards_dateoffset'];
+$awarddate = $_POST['awarded_date']  + ($offset * 60 * 60);
+$medid = $tp->toDB($_POST['medal']);
+$uid = $tp->toDB($_POST['user']);
+$count = $tp->toDB($_POST['count']);
+$date = $tp->toDB($awarddate);
+
 $sql->db_Select("user", "*", "user_id='".$uid."'");
 while($row = $sql->db_Fetch()){
 $usern2 = $row[user_name];}
 $i = 1;
 while ($i <= $count):
-$sql->db_Insert("aacgcawards_awarded_medals", "NULL,'".$medid."' , '".$uid."', '".date("m/d/Y", time())."'");
+$sql->db_Insert("aacgcawards_awarded_medals", "NULL,'".$medid."' , '".$uid."', '".$date."'");
 $i++;
 endwhile;
 $txt = "<center><b>Successfully gave  ".$count." medal(s) to ".$usern2."!</b><center>";
@@ -81,6 +95,24 @@ $text = "
 		<option name='count' value='10'>10</option>
         </td>
 		</tr>
+		<tr>
+        <td style='width:; text-align:right' class='forumheader3'>Date Awarded:</td>
+		<td style='width:' class='forumheader3'>";
+
+$text .= $cal->make_input_field(
+           array('firstDay'       => 1,
+                 'showsTime'      => true,
+                 'showOthers'     => true,
+                 'ifFormat'       => '%s',
+                 'weekNumbers'    => false,
+                 'timeFormat'     => '12'),
+           array('style'       => 'color: #840; background-color: #ff8; border: 1px solid #000; text-align: center',
+                 'name'        => 'awarded_date',
+                 'value'       => ''));
+		
+$text .="</td>";
+
+$text .="</tr>
         <tr>
         <td colspan='2' style='text-align:center' class='forumheader'>
 		<input type='hidden' name='medaltodb' value='1'>
