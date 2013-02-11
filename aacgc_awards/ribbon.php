@@ -16,10 +16,9 @@ $themea = "forumheader3";
 $themeb = "indent";
 
 //-----------------------------------------------------------
-$text .= "
-<a href='".e_PLUGIN."aacgc_awards/Awards.php'><img src='".e_PLUGIN."aacgc_awards/images/back.png' alt='Go Back' align='left' /></a>
-<a href='".e_PLUGIN."aacgc_awards/requestribbon.php?det.".intval($sub_action)."'><img src='".e_PLUGIN."aacgc_awards/images/request.png' alt='Request' align='right' /></a>
-";
+$text .= "<a href='".e_PLUGIN."aacgc_awards/Awards.php'><img src='".e_PLUGIN."aacgc_awards/images/back.png' alt='Go Back' align='left' /></a>";
+if($pref['rib_enable_request'] == "1"){
+$text .= "<a href='".e_PLUGIN."aacgc_awards/requestribbon.php?det.".intval($sub_action)."'><img src='".e_PLUGIN."aacgc_awards/images/request.png' alt='Request' align='right' /></a>";}
 
 		$sql->db_Select("aacgcawards_ribbons", "*", "rib_id='".intval($sub_action)."'");
         $row = $sql->db_Fetch();
