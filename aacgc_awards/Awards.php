@@ -29,7 +29,7 @@ $text .= "
 $text .= "
 <table style='width:100%' class='".$theme."' cellspacing='' cellpadding=''>
 	<tr>
-		<td colspan='3' style='text-align:center' class=''><font size='3'><b><u>Ribbons</u></b></font></td>
+		<td colspan='3' style='text-align:center' class=''><a href='".e_PLUGIN."aacgc_awards/Ribbon_Stats.php'><font size='3'><b><u>Ribbons</u></b></font></a></td>
 	</tr>
 	<tr>
 		<td colspan='3' style='text-align:center' class=''><div style='height:10px'></div></td>
@@ -105,7 +105,7 @@ $text .= "
 
 $text .= "
 	<tr>
-    	<td style='width:100%; text-align:center' colspan='3' class=''><font size='3'><b><u>Medals</u></b></font></td>
+    	<td style='width:100%; text-align:center' colspan='3' class=''><a href='".e_PLUGIN."aacgc_awards/Medal_Stats.php'><font size='3'><b><u>Medals</u></b></font></a></td>
 	</tr>
 	<tr>
 		<td colspan='3' style='text-align:center' class=''><div style='height:10px'></div></td>
