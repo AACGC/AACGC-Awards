@@ -182,30 +182,32 @@ $text .= display_help('helpb', 'forum');
 $text .= "</td> 
 		</tr>
 		<tr>
-			<td style='width:30%' class='forumheader3'>Ribbon Font Size:</td>
+			<td style='width:30%' class='forumheader3'>Ribbon Name Font Size:</td>
 			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='rib_fsize' value='".$tp->toFORM($pref['rib_fsize'])."' />px</td>
 		</tr>
+
 		<tr>
-			<td style='width:30%' class='forumheader3'>Right Ribbon Image Size:</td>
+			<td style='width:30%' class='forumheader3'>Left Ribbon Image Size:</td>
 			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='rib_img1' value='".$tp->toFORM($pref['rib_img1'])."' />px</td>
 		</tr>
 		<tr>
-			<td style='width:30%' class='forumheader3'>Left Ribbon Image Size:</td>
+			<td style='width:30%' class='forumheader3'>Right Ribbon Image Size:</td>
 			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='rib_img2' value='".$tp->toFORM($pref['rib_img2'])."' />px</td>
 		</tr>
 		<tr>
-			<td style='width:30%' class='forumheader3'>Medal Font Size:</td>
+			<td style='width:30%' class='forumheader3'>Medal Name Font Size:</td>
 			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='med_fsize' value='".$tp->toFORM($pref['med_fsize'])."' />px</td>
 		</tr>
 		<tr>
-			<td style='width:30%' class='forumheader3'>Right Medal Image Size:</td>
+			<td style='width:30%' class='forumheader3'>Left Medal Image Size:</td>
 			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='med_img1' value='".$tp->toFORM($pref['med_img1'])."' />px</td>
 		</tr>
 		<tr>
-			<td style='width:30%' class='forumheader3'>Left Medal Image Size:</td>
+			<td style='width:30%' class='forumheader3'>Right Medal Image Size:</td>
 			<td colspan='2'  class='forumheader3'><input class='tbox' type='text' size='15' name='med_img2' value='".$tp->toFORM($pref['med_img2'])."' />px</td>
 		</tr>
-                <tr>
+
+        <tr>
 		        <td style='width:30%' class='forumheader3'>Show Awarded Members Under Ribbon Details:</td>
 		        <td colspan=2 class='forumheader3'>".($pref['rib_enable_userlist'] == 1 ? "<input type='checkbox' name='rib_enable_userlist' value='1' checked='checked' />" : "<input type='checkbox' name='rib_enable_userlist' value='0' />")."</td>
 	        </tr>
