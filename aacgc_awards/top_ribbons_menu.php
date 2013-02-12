@@ -50,11 +50,7 @@ $toprib_text .= "
 
 
 if ($pref['rib_enable_stats'] == "1"){
-$toprib_text .= "<center><br><a href='".e_PLUGIN."advmedsys/Ribbon_Stats.php'>View Ribbon Stats</a><br></center>";}
-
-if ($pref['rib_enable_request'] == "1"){
-$toprib_text .= "<center><br><a href='".e_PLUGIN."advmedsys/requestribbon.php'>Request Ribbon</a><br></center>";}
-
+$toprib_text .= "<center><br><a href='".e_PLUGIN."aacgc_awards/Ribbon_Stats.php'>View Ribbon Stats</a><br></center>";}
 
 //------------------------------------------------------------------------------------------------------
 

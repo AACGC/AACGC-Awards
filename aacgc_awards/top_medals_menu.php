@@ -46,12 +46,7 @@ $topmed_text .= "</table>";}
 
 
 if ($pref['med_enable_stats'] == "1"){
-$topmed_text .= "<center><br><a href='".e_PLUGIN."advmedsys/Medal_Stats.php'>View Medal Stats</a><br></center>";}
-
-
-if ($pref['med_enable_request'] == "1"){
-$topmed_text .= "<center><br><a href='".e_PLUGIN."advmedsys/requestmedal.php'>Request Medal</a><br></center>";}
-
+$topmed_text .= "<center><br><a href='".e_PLUGIN."aacgc_awards/Medal_Stats.php'>View Medal Stats</a><br></center>";}
 
 //------------------------------------------------------------------------------------------------------
 $ns -> tablerender($topmed_title, $topmed_text);
