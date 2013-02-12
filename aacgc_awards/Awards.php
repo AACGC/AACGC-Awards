@@ -1,4 +1,5 @@
 <?php
+global $tp;
 
 require_once("../../class2.php");
 require_once(HEADERF);
@@ -8,15 +9,25 @@ if ($pref['rm_enable_gold'] == "1")
 
 $title .= "".$pref['armpage_title'].""; 
 
+if($pref['awards_usestyle'] == "1"){
 $theme = "";
 $themea = "forumheader3";
 $themeb = "indent";
-$themec = "fcaption";
+$themec = "fcaption";}
+
+$text .= "
+<table style='width:100%' class='".$themea."' cellspacing='' cellpadding=''>
+	<tr>
+		<td colspan='3' style='text-align:center' class='".$themeb."'>".$tp->toHTML($pref['awards_header'], TRUE)."</td>
+	</tr>
+</table>
+<br/><br/>
+";
 
 //------------------------------------# Ribbons #--------------------------------------------------------
 
 $text .= "
-<table style='width:100%' class='' cellspacing='' cellpadding=''>
+<table style='width:100%' class='".$theme."' cellspacing='' cellpadding=''>
 	<tr>
 		<td colspan='3' style='text-align:center' class=''><font size='3'><b><u>Ribbons</u></b></font></td>
 	</tr>
@@ -83,13 +94,16 @@ $text .= "
 	</tr>
 ";}
 	
-$text .= "</table><br/><br/>";    
+$text .= "
+	<tr>
+		<td colspan='3' style='text-align:center' class=''><div style='height:10px'></div></td>
+	</tr>
+";    
 
 //-----------------------------------# Medals #-----------------------------------------+
 
 
 $text .= "
-<table style='width:100%' class='' cellspacing='' cellpadding=''>
 	<tr>
     	<td style='width:100%; text-align:center' colspan='3' class=''><font size='3'><b><u>Medals</u></b></font></td>
 	</tr>
