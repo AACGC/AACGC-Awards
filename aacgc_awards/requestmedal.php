@@ -8,6 +8,13 @@ if (e_QUERY) {
         $id = $tmp[2];
         unset($tmp);
 }
+
+if($pref['awards_usestyle'] == "1"){
+$theme = "";
+$themea = "forumheader3";
+$themeb = "indent";
+$themec = "fcaption";}
+
 if(USER){
 //----------------------------------------------
 if ($_POST['add_request'] == '1') {
@@ -16,20 +23,20 @@ $newreason = $_POST['reason_wanted'];
 $newmed = $_POST['medal_wanted'];
 
 $sql->db_Insert("aacgcawards_medals_request", "NULL, '".$newname."', '".$newreason."', '".$newmed."'") or die(mysql_error());
-
 $ns->tablerender("", "<center><b>Request Sent</b></center>");
-
 require_once(FOOTERF);}
 
 //---------------------------------------------------------------------------
 
+$text .= "<a href='".e_PLUGIN."aacgc_awards/medal.php?det.".intval($sub_action)."'><img src='".e_PLUGIN."aacgc_awards/images/back.png' alt='Go Back' align='left' /></a>";
+
         $sql->db_Select("aacgcawards_medals", "*", "medal_id='".intval($sub_action)."'");
         $row = $sql->db_Fetch();
 		
-$text .= "<table style='' class=''><tr><td class='fcaption' colspan=2><center>Medal Chosen</center></td></tr>";
+$text .= "<table style='' class=''><tr><td class='".$themec."' colspan='2'><center>Medal Chosen</center></td></tr>";
 $text .= "<tr>
-<td class='forumheader3'><font size='".$pref['rib_fsizer']."'>".$row['medal_name']."</font></td>
-<td style='width:15%' class='forumheader3'><center><img width='".$pref['rib_imgr']."' src='".e_PLUGIN."advmedsys/medalimg/".$row['medal_pic']."' alt = 'AACGC Medal'></img></center></td>";
+<td class='".$themea."'><font size='".$pref['rib_fsizer']."'>".$row['medal_name']."</font></td>
+<td style='width:15%' class='".$themea."'><img width='".$pref['rib_imgr']."' src='".e_PLUGIN."aacgc_awards//medals/".$row['medal_pic']."' alt='' /></td>";
 
 $text .= "</table>";
 
@@ -37,7 +44,7 @@ $text .= "</table>";
 
 $text .= "<br><br><center>
 <form method='POST' action='requestmedal.php'>
-<table style='width:100%' class='forumheader3'>
+<table style='width:100%' class='".$themea."'>
 	<tr>
 		<td style='width:50%'>Your Name:</td>
 		<td style='width:50%'><input class='tbox' type='text' name='user_name' size='50' value='".USERNAME."'></td>
@@ -59,6 +66,6 @@ $text .= "<br><br><center>
 ";
 //-------------
 }
-$ns -> tablerender("Request Medals Form", $text);
+$ns -> tablerender("Request Medal Form", $text);
 require_once(FOOTERF);
 ?>
