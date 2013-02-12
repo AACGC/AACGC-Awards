@@ -36,30 +36,28 @@ $text .= "<td colspan='2' class=''><center><br>
 <font size='".$pref['rib_sfsize']."'>".$row['rib_name']."</font></center></td></tr>";
 
 
-$sql2 = new db;
-$sql2->db_Select("aacgcawards_awarded_ribbons", "*", "awarded_rib_id='".$row['rib_id']."'");
-while($row2 = $sql2->db_Fetch()){
-$sql3 = new db;
-$sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'");
-$row3 = $sql3->db_Fetch();
-$sql4 = new db;
-$sql4->mySQLresult = @mysql_query("select awarded_user_id, count(awarded_user_id) as ribbons from ".MPREFIX."aacgcawards_awarded_ribbons where awarded_rib_id=".$row['rib_id']."
-and awarded_user_id=".$row3['user_id'].";");
-$rows = $sql4->db_Rows();
-for ($i=0; $i < $rows; $i++) {
-$result = $sql4->db_fetch();
-$c = "".$result['ribbons']."";}
+		$sql2 = new db;
+		$sql2->db_Select("aacgcawards_awarded_ribbons", "*", "awarded_rib_id='".$row['rib_id']."' order by awarded_date asc");
+		while($row2 = $sql2->db_Fetch()){
+		$sql3 = new db;
+		$sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'");
+		$row3 = $sql3->db_Fetch();
 
-if ($pref['rm_enable_gold'] == "1"){
-$userorb = "".$gold_obj->show_orb($row3['user_id'])."";}
-else
-{$userorb = $row3['user_name'];}
+		$dformat = $pref['awards_dateformat'];
+		$offset = $pref['awards_dateoffset'];
+		$time = $row2['awarded_date'] + ($offset * 60 * 60);
+		$awarddate = date($dformat, $time);
+		
+		if ($pref['rm_enable_gold'] == "1"){
+		$userorb = "".$gold_obj->show_orb($row3['user_id'])."";}
+		else
+		{$userorb = $row3['user_name'];}
 
 
 $text .= "
 	<tr>
-		<td style='width:50%; text-align:center' class='".$themeb."'>".$userorb."</td>
-		<td style='width:50%; text-align:center' class='".$themeb."'>".$row2['awarded_date']."</td>
+		<td style='width:50%; text-align:center' class='".$themeb."'><a href='".e_BASE."user.php?id.".$row3['user_id']."'>".$userorb."</a></td>
+		<td style='width:50%; text-align:center' class='".$themeb."'>".$awarddate."</td>
 	</tr>
 ";}
 

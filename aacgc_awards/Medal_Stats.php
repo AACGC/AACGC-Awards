@@ -40,35 +40,34 @@ $text .= "
 ";
 
 
-$sql2 = new db;
-$sql2->db_Select("aacgcawards_awarded_medals", "*", "awarded_medal_id='".$row['medal_id']."'");
-while($row2 = $sql2->db_Fetch()){
-$sql3 = new db;
-$sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'");
-$row3 = $sql3->db_Fetch();
-$sql4 = new db;
-$sql4->mySQLresult = @mysql_query("select awarded_user_id, count(awarded_user_id) as medals from ".MPREFIX."aacgcawards_awarded_medals where awarded_medal_id=".$row['medal_id']."
-and awarded_user_id=".$row3['user_id'].";");
-$rows = $sql4->db_Rows();
-for ($i=0; $i < $rows; $i++) {
-$result = $sql4->db_fetch();
-$c = "".$result['medals']."";}
+		$sql2 = new db;
+		$sql2->db_Select("aacgcawards_awarded_medals", "*", "awarded_medal_id='".$row['medal_id']."' order by awarded_date asc");
+		while($row2 = $sql2->db_Fetch()){
+		$sql3 = new db;
+		$sql3->db_Select("user", "*", "user_id='".$row2['awarded_user_id']."'");
+		$row3 = $sql3->db_Fetch();
 
-if ($row3['user_name'] == ""){
-$text .= "";}
-else{
+		$dformat = $pref['awards_dateformat'];
+		$offset = $pref['awards_dateoffset'];
+		$time = $row2['awarded_date'] + ($offset * 60 * 60);
+		$awarddate = date($dformat, $time);
+		
+		if ($row3['user_name'] == ""){
+		$text .= "";}
+		else{
 
-if ($pref['rm_enable_gold'] == "1"){
-$userorb = "".$gold_obj->show_orb($row3['user_id'])."";}
-else
-{$userorb = $row3['user_name'];}
+		if ($pref['rm_enable_gold'] == "1"){
+		$userorb = "".$gold_obj->show_orb($row3['user_id'])."";}
+		else
+		{$userorb = $row3['user_name'];}
 
 $text .= "
 <tr>
-	<td style='width:50%; text-align:center' class='".$themeb."'>".$userorb."</td>
-	<td style='width:50%; text-align:center' class='".$themeb."'>".$row2['awarded_date']."</td>
+	<td style='width:50%; text-align:center' class='".$themeb."'><a href='".e_BASE."user.php?id.".$row3['user_id']."'>".$userorb."</a></td>
+	<td style='width:50%; text-align:center' class='".$themeb."'>".$awarddate."</td>
 </tr>
-";}}
+";
+}}
 
 
 $text .= "</table><br/>";}
