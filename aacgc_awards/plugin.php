@@ -91,7 +91,10 @@ $eplug_prefs = array(
 "rmmenu_title"=> "Total Awarded Menu",
 "rib_enable_userribbons"=> "0",
 "med_enable_usermedals"=> "0",
-
+"awards_usestyle"=> "1",
+"awards_dateformat"=> "m/d/Y",
+"awards_dateoffset"=> "+2",
+"awards_header"=> "",
 );
 
 $eplug_done = "Install Complete";
@@ -99,6 +102,11 @@ $eplug_upgrade_done = "Upgrade Complete";
 $upgrade_table_names = "";
 $upgrade_alter_tables = "";
 $upgrade_remove_prefs = "";
-$upgrade_add_prefs = "";
+$upgrade_add_prefs = array(
+"awards_usestyle"=> "1",
+"awards_dateformat"=> "m/d/Y",
+"awards_dateoffset"=> "+2",
+"awards_header"=> "",
+);
 
 ?>
