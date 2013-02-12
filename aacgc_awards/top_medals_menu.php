@@ -1,4 +1,11 @@
 <?php
+
+if($pref['awards_usestyle'] == "1"){
+$theme = "";
+$themea = "forumheader3";
+$themeb = "indent";
+$themec = "fcaption";}
+
 //-----------------------------------------------------------
 $topmed_title .= "".$pref['topmed_name']."";
 //-----------------------------------------------------------

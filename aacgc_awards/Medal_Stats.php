@@ -12,10 +12,11 @@ if (e_QUERY) {
 if ($pref['rm_enable_gold'] == "1")
 {$gold_obj = new gold();}
 
+if($pref['awards_usestyle'] == "1"){
 $theme = "";
 $themea = "forumheader3";
 $themeb = "indent";
-$themec = "fcaption";
+$themec = "fcaption";}
 $title .= "".$pref['mspage_title'].""; 
 
 //------------------------------------# Ribbons Section #--------------------------------------------------------

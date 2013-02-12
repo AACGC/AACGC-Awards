@@ -1,5 +1,11 @@
 <?php
 
+if($pref['awards_usestyle'] == "1"){
+$theme = "";
+$themea = "forumheader3";
+$themeb = "indent";
+$themec = "fcaption";}
+
 //-----------------------------------------------------------
 $toprib_title .= "".$pref['toprib_name']."";
 //-----------------------------------------------------------

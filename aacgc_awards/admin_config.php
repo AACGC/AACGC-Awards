@@ -55,7 +55,6 @@ if (e_QUERY == "update")
     $pref['numrib'] = $tp->toDB($_POST['numrib']);
     $pref['nummed'] = $tp->toDB($_POST['nummed']);
     $pref['awards_header'] = $tp->toDB($_POST['awards_header']);
-    $pref['awards_intro'] = $tp->toDB($_POST['awards_intro']);
     $pref['awards_dateoffset'] = $tp->toDB($_POST['awards_dateoffset']);
     $pref['awards_dateformat'] = $tp->toDB($_POST['awards_dateformat']);
 
@@ -134,6 +133,11 @@ if (isset($_POST['rm_enable_forummname']))
 else
 {$pref['rm_enable_forummname'] = 0;}
 
+if (isset($_POST['awards_usestyle'])) 
+{$pref['awards_usestyle'] = 1;}
+else
+{$pref['awards_usestyle'] = 0;}
+
     save_prefs();
     $led_msgtext = "Settings Saved";
 }
@@ -148,6 +152,12 @@ $text .= "
 		<tr>
 			<td colspan='3' class='fcaption'><b>Main Display Settings:</b></td>
 		</tr>
+        <tr>
+		    <td style='width:30%' class='forumheader3'>Use Style.css for layout:<br/>(recommended for more detailed looks)</td>
+		    <td colspan='2' class='forumheader3'>
+			".($pref['awards_usestyle'] == 1 ? "<input type='checkbox' name='awards_usestyle' value='1' checked='checked' />" : "<input type='checkbox' name='awards_usestyle' value='0' />")."
+			</td>
+	    </tr>		
 		<tr>
 			<td style='width:30%' class='forumheader3'>Date Format:<br/>(<a href='http://php.net/manual/en/function.date.php' target=_blank'>PHP Date Formats</a>)</td>
 			<td colspan='2'  class='forumheader3'>

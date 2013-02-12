@@ -1,8 +1,10 @@
 <?php
+
+if($pref['awards_usestyle'] == "1"){
 $theme = "";
 $themea = "forumheader3";
 $themeb = "indent";
-$themec = "fcaption";
+$themec = "fcaption";}
 
 $medrib_title = "".$pref['rmmenu_title']."";
 

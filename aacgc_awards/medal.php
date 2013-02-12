@@ -11,9 +11,11 @@ if (e_QUERY) {
 if ($pref['rm_enable_gold'] == "1")
 {$gold_obj = new gold();}
 
+if($pref['awards_usestyle'] == "1"){
 $theme = "";
 $themea = "forumheader3";
 $themeb = "indent";
+$themec = "fcaption";}
 
 //-----------------------------------------------------------
 $text .= "<a href='".e_PLUGIN."aacgc_awards/Awards.php'><img src='".e_PLUGIN."aacgc_awards/images/back.png' alt='Go Back' align='left' /></a>";
